@@ -1,0 +1,80 @@
+{% load static %}
+{% load i18n %}
+
+{% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}"{% if LANGUAGE_BIDI %} dir="rtl"{% endif %}>
+    {% block body %}
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>{{SITE_NAME}} | {{label | default:'Business Card'}}{% block title %}{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+        {% block custom_meta %}{% endblock %}
+    
+        <meta property="og:site_name" content="{{SITE_NAME}}" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="{{SITE_URL}}{{request.path}}"/>
+
+        <meta property="og:title" content="{{SITE_NAME}}" />
+        <meta property="og:description" content="{{SITE_DESCRIPTION}}" />
+
+        <meta property="og:image" content="{{SITE_URL}}{% static SITE_METAIMAGE %}" />
+
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:url" content="{{SITE_URL}}{% static SITE_METAIMAGE %}" />
+        <meta property="og:image:secure_url" content="{{SITE_URL}}{% static SITE_METAIMAGE %}" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="og:street_address" content= "{{SITE_ADDRESS}}" />
+
+        <meta property="twitter:url" content="{{SITE_URL}}{{request.path}}"/>
+
+        <meta name="twitter:title" content="{{SITE_NAME}}" />
+        <meta property="og:email" content="{{SITE_MAIL}}" />
+        <meta name="twitter:description" content="{{SITE_DESCRIPTION}}" />
+        <meta property="og:phone_number" content="{{SITE_PHONE}}" />
+        
+        <meta name="twitter:image" content="{{SITE_URL}}{% static SITE_METAIMAGE %}" />
+        <meta name="twitter:image:width" content="1200" />
+        <meta name="twitter:image:height" content="630" />
+        <meta itemprop="name" content="{{SITE_NAME}}" />
+        <meta itemprop="description" content="{{SITE_DESCRIPTION}}" />
+
+
+        <link rel="image_src" href="{{SITE_URL}}{% static SITE_METAIMAGE %}" />
+        <link rel="shortcut icon" type="image/x-icon" href="{{FAVICON_ICO}}" />
+        <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet" type="text/css" />
+        <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'assets/css/fontawesome-all.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'brandface/style.css' %}" rel="stylesheet" type="text/css" />
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+        {% block stylesheet %}{% endblock %}
+
+        {% block headerscript %}
+            <script src="{% static 'language/js/translate.js' %}"></script>
+            <script type="text/javascript">
+                 var Trans = new JsTransaltion();
+            </script>
+        {% endblock %}
+        {% if settings.GOOGLE_ANALYTICS_KEY %}
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{settings.GOOGLE_ANALYTICS_KEY}}"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', '{{settings.GOOGLE_ANALYTICS_KEY}}');
+        </script>
+        {% endif %}
+
+    </head>
+    <body>
+        {% block content %}{% endblock %}
+    </body>
+    <script src="{% static 'assets/js/vendor/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    {% block javascript %}{% endblock %}
+    {% endblock body %}
+</html>
