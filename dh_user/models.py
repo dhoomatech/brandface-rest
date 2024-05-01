@@ -73,7 +73,7 @@ class User(AbstractBaseUser):
     contact_number = models.CharField(max_length=100, null=True)
     email_code = models.CharField(max_length=100, null=True)
     social_auth = models.CharField(max_length=20,choices=SOCIAL_AUTH_PLATFORM.choices, default=SOCIAL_AUTH_PLATFORM.NONE)
-    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE,null=True,blank=True)
     
     REQUIRED_FIELDS = ['location', 'contact_number']
 
