@@ -47,6 +47,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["13.112.86.78","127.0.0.1","api-uat.brandface.me"]
 
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+
 
 # Application definition
 

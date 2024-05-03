@@ -13,6 +13,8 @@ from dh_user.mail import send_verify_email
 from django.http import HttpResponseRedirect
 from django.conf import settings
 from django.contrib.auth.base_user import BaseUserManager
+from rest_framework_simplejwt.tokens import RefreshToken
+from django.contrib.auth.hashers import check_password
 
 import logging
 
@@ -36,6 +38,8 @@ class UserViewSet(viewsets.ModelViewSet):
 
         if self.action == 'create':
             permission_classes = []
+        elif self.action == 'user_login':
+            permission_classes = []
         elif self.action == 'delete':
             permission_classes = [permissions.IsAdminUser]
         elif self.action == 'update':
@@ -55,6 +59,8 @@ class UserViewSet(viewsets.ModelViewSet):
 
             if self.action == 'create':
                 return CreateUserSerializer
+            elif self.action == 'user_login':
+                return UserLoginSerializer
             elif self.action == 'update':
                 return UpdateUserSerializer
             elif self.action == 'reset_password':
@@ -74,6 +80,19 @@ class UserViewSet(viewsets.ModelViewSet):
         user.save()
         return Response({'status': True})
 
+    @action(methods=['post'], detail=False, url_path='user-login')
+    def user_login(self, request, *args, **kwargs):
+        username = request.data.get("email")
+        password = request.data.get("password")
+        try:
+            student_obj = User.objects.get(email=username)
+            if student_obj and check_password(password,student_obj.password):
+                refresh = RefreshToken.for_user(student_obj)
+                return Response({'refresh': str(refresh),'access': str(refresh.access_token),'status': True})
+        except:
+            return Response({'message':"Email address not found.",'status': False})
+
+        return Response({'message':"Invalid credentials.",'status': False})
     
     @action(methods=['post'], detail=False, url_path='send-verify-email')
     def send_verify_email(self, request):

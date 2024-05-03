@@ -12,6 +12,11 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         exclude = ['password', 'email_code']
 
+class UserLoginSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['password', 'email']
+
 class UpdateUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
