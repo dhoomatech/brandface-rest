@@ -12,12 +12,12 @@ admin.site.register(SocialMedia,AdminSocialMedia)
 
 
 class UserGalleryMedia(admin.ModelAdmin):
-    list_display = ['id','user','picture']
+    list_display = ['id','profile','picture']
 
 admin.site.register(UserGallery,UserGalleryMedia)
 
 
 class UserServicesMedia(admin.ModelAdmin):
-    list_display = ['id','user','picture','tittle']
+    list_display = ['id','profile','picture','tittle']
 
 admin.site.register(UserServices,UserServicesMedia)

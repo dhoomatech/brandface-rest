@@ -17,3 +17,10 @@ class Location(models.Model):
 
 # def get_default_location():
 #     return Location.objects.get_or_create(tittle="kozhikode")[0]
+
+
+class SubscriptionPlan(models.Model):
+    tittle = models.CharField(max_length=100)
+    code = models.CharField(max_length=100)
+    profiles = models.CharField(max_length=100, blank=True)
+    plan_image = models.ImageField(upload_to="subscription-plan", blank=True, null=False)

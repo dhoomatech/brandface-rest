@@ -19,6 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from dh_user.urls import router as UserRouter
+from dh_content.urls import router as ContentRouter
 
 from drf_spectacular.views import (
     SpectacularSwaggerView,
@@ -34,5 +35,7 @@ urlpatterns = [
     path('', include("dh_content.urls")),
 
     path('api/user/', include(UserRouter.urls)),
+
+    path('api/content/', include(ContentRouter.urls)),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
