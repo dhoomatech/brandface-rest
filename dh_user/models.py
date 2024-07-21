@@ -36,7 +36,7 @@ class UserManager(BaseUserManager):
             raise ValueError('Users must have an email address')
 
         email = self.normalize_email(email)
-        user = self.model(email=email, **extra_fields)
+        user = User(email=email, **extra_fields)
         user.set_password(password)
         user.save()
         return user
@@ -45,9 +45,15 @@ class UserManager(BaseUserManager):
         """
         Create and save a SuperUser with the given email and password.
         """
-        extra_fields.setdefault('is_admin', True)
-        extra_fields.setdefault('is_verified', True)
+        extra_fields.setdefault("is_staff", True)
+        extra_fields.setdefault("is_superuser", True)
+        extra_fields.setdefault("is_active", True)
 
+        if extra_fields.get("is_staff") is not True:
+            raise ValueError(_("Superuser must have is_staff=True."))
+        if extra_fields.get("is_superuser") is not True:
+            raise ValueError(_("Superuser must have is_superuser=True."))
+        
         return self.create_user(email, password, **extra_fields)
 
 
@@ -67,7 +73,9 @@ class User(AbstractBaseUser):
     )
     
     date_joined = models.DateTimeField(auto_now_add=True)
-    is_admin = models.BooleanField(default=False) # Super Admin User
+    is_admin = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     email_verified = models.BooleanField(default=False)
     contact_number = models.CharField(max_length=100, null=True)
@@ -75,9 +83,9 @@ class User(AbstractBaseUser):
     last_name = models.CharField(max_length=100, null=True)
     email_code = models.CharField(max_length=100, null=True)
     social_auth = models.CharField(max_length=20,choices=SOCIAL_AUTH_PLATFORM.choices, default=SOCIAL_AUTH_PLATFORM.NONE)
-    location = models.ForeignKey(Location, on_delete=models.CASCADE,null=True,blank=True)
+    # location = models.ForeignKey(Location, on_delete=models.CASCADE,null=True,blank=True)
     
-    REQUIRED_FIELDS = ['location', 'contact_number']
+    REQUIRED_FIELDS = ['contact_number']
 
 
     def __str__(self):
