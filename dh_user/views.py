@@ -88,7 +88,16 @@ class UserViewSet(viewsets.ModelViewSet):
             student_obj = User.objects.get(email=username)
             if student_obj and check_password(password,student_obj.password):
                 refresh = RefreshToken.for_user(student_obj)
-                return Response({'refresh': str(refresh),'access': str(refresh.access_token),'status': True})
+                return Response({
+                    'refresh': str(refresh),
+                    'access': str(refresh.access_token),
+                    "first_name":student_obj.first_name,
+                    "last_name":student_obj.last_name,
+                    "contact_number":str(student_obj.contact_number),
+                    "email":str(student_obj.email),
+                    'status': True,
+                    }
+                )
         except:
             return Response({'message':"Email address not found.",'status': False})
 
