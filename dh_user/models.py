@@ -99,6 +99,15 @@ class User(AbstractBaseUser):
         # Simplest possible answer: All admins are staff
         return self.is_admin
 
+class ProfileCategory(models.Model):
+    name = models.CharField(_("Category name"), max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        verbose_name = _("Category")
+        verbose_name_plural = _("Categories")
+
+    def __str__(self):
+        return self.name
 
 class UserProfileData(models.Model):
     about = models.TextField(default='')
@@ -110,6 +119,7 @@ class UserProfileData(models.Model):
     date_of_birth = models.DateField(null=True)
     avatar = models.ImageField(upload_to=upload_profile_picture, blank=True, null=False)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    category = models.ForeignKey(ProfileCategory, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.user.username} {self.user.email}"

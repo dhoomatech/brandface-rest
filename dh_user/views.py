@@ -137,3 +137,45 @@ class AddressViewSet(ReadOnlyModelViewSet):
         return res.filter(user=user)
 
 
+class UserProfileViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = UserProfileData.objects.all()
+    serializer_class = UserProfileDataSerializer
+    http_method_names = ['get', 'post', 'put']
+    
+    def get_permissions(self):
+
+        if self.action == 'create':
+            permission_classes = [permissions.IsAuthenticated]
+        elif self.action == 'delete':
+            permission_classes = [permissions.IsAuthenticated]
+        elif self.action == 'update':
+            permission_classes = [permissions.IsAuthenticated]
+        else:
+            permission_classes = []
+        
+        return [permission() for permission in permission_classes]
+
+    def get_serializer_class(self):
+
+            if self.action == 'create':
+                return UserProfileDataSerializer
+            elif self.action == 'update':
+                return UserProfileDataSerializer
+            else:
+                return UserProfileDataSerializer
+
+    def create(self, request, *args, **kwargs):
+
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+    def update(self, request, *args, **kwargs):
+        kwargs['partial'] = True
+        return super().update(request, *args, **kwargs)

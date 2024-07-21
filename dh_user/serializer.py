@@ -162,3 +162,13 @@ class PublicIconsWriteSerializer(serializers.ModelSerializer):
             nested_serializer.update(nested_instance, nested_data)
 
         return super(PublicIconsWriteSerializer, self).update(instance, validated_data)
+
+
+class UserProfileDataSerializer(serializers.ModelSerializer):
+    """
+    Serializer class for User Profile Data
+    """
+
+    class Meta:
+        model = UserProfileData
+        fields = "__all__"
