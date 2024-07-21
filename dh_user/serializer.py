@@ -28,7 +28,7 @@ class UpdateUserSerializer(serializers.ModelSerializer):
 class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        exclude = ['email_code','location']
+        exclude = ['email_code']
         extra_kwargs = {'is_admin': {'read_only': True}, 'is_active': {'read_only': True}, 'last_login': {'read_only': True}, 'email_verified': {'read_only': True}, 'password': {'write_only': True},}
 
     def create(self, validated_data):
