@@ -91,10 +91,10 @@ class UserViewSet(viewsets.ModelViewSet):
                 return Response({
                     'refresh': str(refresh),
                     'access': str(refresh.access_token),
-                    # "first_name":student_obj.first_name,
-                    # "last_name":student_obj.last_name,
-                    # "contact_number":str(student_obj.contact_number),
-                    # "email":str(student_obj.email),
+                    "first_name":student_obj.first_name,
+                    "last_name":student_obj.last_name,
+                    "contact_number":str(student_obj.contact_number),
+                    "email":str(student_obj.email),
                     'status': True,
                     }
                 )
