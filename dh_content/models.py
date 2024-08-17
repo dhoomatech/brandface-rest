@@ -22,7 +22,7 @@ class ProfileLinks(models.Model):
     avatar = models.ImageField(upload_to=upload_profile_avatar, blank=True, null=False)
     background = models.ImageField(upload_to=upload_profile_background, blank=True, null=False)
     background_color = models.CharField(max_length=50, default='', null=False,blank=True)
-
+    qr_file = models.FileField(upload_to="qr-code", blank=True, null=False)
     def __str__(obj):
         return str(obj.username)
 

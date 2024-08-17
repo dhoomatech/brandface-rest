@@ -24,3 +24,11 @@ def normalize_to_utc(time, timezone):
 
     return tzt.localize(time).astimezone(utct)
 
+
+def key_exists(dict_value = {},list_value = []):
+
+    if dict_value and list_value:
+        keysList = list(dict_value.keys())
+        return set(list_value) - set(keysList)
+
+    return {}

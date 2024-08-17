@@ -8,7 +8,7 @@ app_name = "users"
 router = routers.DefaultRouter()
 router.register(f"address", AddressViewSet)
 router.register("", UserViewSet)
-router.register("profile", UserProfileViewSet)
+# router.register("profile", UserProfileViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),

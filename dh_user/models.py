@@ -73,6 +73,7 @@ class User(AbstractBaseUser):
     )
     
     date_joined = models.DateTimeField(auto_now_add=True)
+    date_of_birth = models.DateTimeField(null=True,blank=True)
     is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
@@ -82,6 +83,7 @@ class User(AbstractBaseUser):
     first_name = models.CharField(max_length=100, null=True)
     last_name = models.CharField(max_length=100, null=True)
     email_code = models.CharField(max_length=100, null=True)
+    gender = models.CharField(max_length=100, null=True)
     social_auth = models.CharField(max_length=20,choices=SOCIAL_AUTH_PLATFORM.choices, default=SOCIAL_AUTH_PLATFORM.NONE)
     # location = models.ForeignKey(Location, on_delete=models.CASCADE,null=True,blank=True)
     
@@ -118,16 +120,8 @@ class ProfileCategory(models.Model):
         return self.name
 
 class UserProfileData(models.Model):
-    about = models.TextField(default='')
-    website = models.CharField(max_length=255, null=False,default='',blank=True)
-    description = models.CharField(max_length=255, null=False,default='')
     referal_code = models.CharField(max_length=255, unique=True)
-    is_admin = models.BooleanField(default=False) # Admin User
-    is_ass_admin = models.BooleanField(default=False) # Associated Admin User
-    date_of_birth = models.DateField(null=True)
-    avatar = models.ImageField(upload_to=upload_profile_picture, blank=True, null=False)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    category = models.ForeignKey(ProfileCategory, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.user.username} {self.user.email}"

@@ -16,6 +16,7 @@ from django.contrib.auth.base_user import BaseUserManager
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth.hashers import check_password
 
+from dh_content.models import ProfileLinks
 import logging
 
 from .serializer import *
@@ -85,19 +86,22 @@ class UserViewSet(viewsets.ModelViewSet):
         username = request.data.get("email")
         password = request.data.get("password")
         try:
-            student_obj = User.objects.get(email=username)
-            if student_obj and check_password(password,student_obj.password):
-                refresh = RefreshToken.for_user(student_obj)
+            user_obj = User.objects.get(email=username)
+            if user_obj and check_password(password,user_obj.password):
+                refresh = RefreshToken.for_user(user_obj)
+                card_count = ProfileLinks.objects.filter(user=user_obj).count()
                 return Response({
                     'refresh': str(refresh),
                     'access': str(refresh.access_token),
-                    "first_name":student_obj.first_name,
-                    "last_name":student_obj.last_name,
-                    "contact_number":str(student_obj.contact_number),
-                    "email":str(student_obj.email),
+                    "first_name":user_obj.first_name,
+                    "last_name":user_obj.last_name,
+                    "contact_number":str(user_obj.contact_number),
+                    "email":str(user_obj.email),
                     'status': True,
-                    }
-                )
+                    'profiles':card_count,
+                    'id':user_obj.id,
+                })
+            
         except:
             return Response({'message':"Email address not found.",'status': False})
 
@@ -163,7 +167,7 @@ class UserProfileViewSet(viewsets.ModelViewSet):
         elif self.action == 'update':
             permission_classes = [permissions.IsAuthenticated]
         else:
-            permission_classes = []
+            permission_classes = [permissions.IsAuthenticated]
         
         return [permission() for permission in permission_classes]
 

@@ -71,8 +71,11 @@ class ProfileLinkViewSet(viewsets.ModelViewSet):
     serializer_class = ProfileLinksSerializer
     permission_classes = (IsUserProfileOwner,)
     http_method_names = ['post']
-    @action(detail=False, methods=['post'])
-    def profile_create(self, request, pk=None):
+
+    def create(self, request, pk=None):
+        user = request.user
+        request_data = request.data
+        super().create(self, request, pk=None)
 
         return Response({'status': 'password set'})
         
