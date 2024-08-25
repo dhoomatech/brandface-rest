@@ -22,7 +22,7 @@ class ProfileLinksCreateSerializer(serializers.ModelSerializer):
 class ProfileLinksSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProfileLinks
-        exclude = ['id','user','qr_file','username']
+        exclude = ['id','user','qr_file','username','status']
         validators = [
             UniqueTogetherValidator(
                 queryset=ProfileLinks.objects.all(),
