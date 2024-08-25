@@ -11,6 +11,7 @@ from django.views.generic import TemplateView
 
 router = routers.DefaultRouter()
 router.register(f"profile", ProfileLinkViewSet2)
+router.register(f"profile2/user", ProfileLinksViewSet)
 # router.register("profile", ProfileLinkViewSet)
 # router.register(r'profile2', ProfileLinkViewSet2, basename='profilelinks')
 router.register(r'social', SocialMediaViewSet, basename='profisociallelinks')
