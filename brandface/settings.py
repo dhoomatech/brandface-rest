@@ -201,15 +201,15 @@ SESSION_CACHE_ALIAS = 'default'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(os.path.dirname(BASE_DIR), 'static'),
+    os.path.join(os.path.dirname(PROJECT_DIR), 'static'),
 ]
-STATIC_ROOT = env.str("STATIC_ROOT",default=os.path.join(BASE_DIR, 'static'))
+STATIC_ROOT = env.str("STATIC_ROOT",default=os.path.join(PROJECT_DIR, 'static'))
 
 #Media File
 MEDIA_URL = '/media/'
-MEDIA_ROOT = env.str("MEDIA_DIR",default=os.path.join(os.path.dirname(BASE_DIR), 'media'))
+MEDIA_ROOT = env.str("MEDIA_DIR",default=os.path.join(os.path.dirname(PROJECT_DIR), 'media'))
 MEDIAFILES_DIRS = (
-    os.path.join(BASE_DIR, 'media'),
+    os.path.join(PROJECT_DIR, 'media'),
 )
 COMPRESS_ENABLED = True
 
