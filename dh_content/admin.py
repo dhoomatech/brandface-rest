@@ -5,6 +5,11 @@ from .models import *
 
 admin.site.register(UserConnections)
 
+class AdminProfileLinks(admin.ModelAdmin):
+    list_display = ['id','user']
+
+admin.site.register(ProfileLinks,AdminProfileLinks)
+
 class AdminSocialMedia(admin.ModelAdmin):
     list_display = ['id','name' ,'icon','status']
 
