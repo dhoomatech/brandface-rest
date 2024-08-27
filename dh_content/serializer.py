@@ -45,7 +45,7 @@ class SocialMediaSerializer(serializers.ModelSerializer):
 class UserGallerySerializer(serializers.ModelSerializer):
     class Meta:
         model = UserGallery
-        exclude = ['created']
+        exclude = ['created','profile']
 
 class UserServicesSerializer(serializers.ModelSerializer):
     class Meta:

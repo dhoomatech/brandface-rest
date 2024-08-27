@@ -88,7 +88,7 @@ class UserConnections(models.Model):
 
 
 class UserGallery(models.Model):
-    profile = models.ForeignKey(ProfileLinks, on_delete=models.CASCADE,null=False,blank=True)
+    profile = models.ForeignKey(ProfileLinks, on_delete=models.CASCADE,null=True,blank=True)
     picture = models.FileField(upload_to="profile-images", null=False,default='')
     created  = models.DateTimeField(default=timezone.now)
     

@@ -155,7 +155,7 @@ class UserGalleryViewSet(ReadOnlyModelViewSet):
     queryset = UserGallery.objects.all()
     serializer_class = UserGallerySerializer
     permission_classes = (IsUserProfileOwner,)
-    http_method_names = ['get','post','patch']
+    # http_method_names = ['post']
 
     def get_queryset(self):
         res = super().get_queryset()
@@ -183,3 +183,23 @@ class ProfileDataGet(APIView):
             return Response({'msg':'User profile data','data':serializer_data.data}, status=status.HTTP_200_OK)
         else:
             return Response({'msg':'User profile data not availabe','data':[]}, status=status.HTTP_404_NOT_FOUND)
+        
+
+
+# from rest_framework.parsers import FileUploadParser
+from rest_framework.response import Response
+from rest_framework.views import APIView
+class FileUploadView(APIView):
+    # queryset = UserGallery.objects.all()
+    serializer_class = UserGallerySerializer
+    permission_classes = (IsUserProfileOwner,)
+    # parser_classes = (FileUploadParser,)
+    def post(self, request):
+        print(request.data)
+        serializer = UserGallerySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+
+            return Response({'message': 'File uploaded successfully','data':serializer.data})
+        else:
+            return Response(serializer.errors, status=400)

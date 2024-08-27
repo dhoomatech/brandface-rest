@@ -16,10 +16,11 @@ router.register(f"profile2/user", ProfileLinksViewSet)
 # router.register(r'profile2', ProfileLinkViewSet2, basename='profilelinks')
 router.register(r'social', SocialMediaViewSet, basename='profisociallelinks')
 router.register(r'user-connct', UserConnectionsViewSet, basename='user-connct')
-router.register(r'user-gallary', UserGalleryViewSet, basename='user-gallary')
+router.register(f'user-gallary', UserGalleryViewSet)
 router.register(r'user-services', UserServicesViewSet, basename='user-services')
 
 urlpatterns = [
     path("username-check/<str:user_name>", UserNameCheck.as_view()),
     path("user-profile/<str:user_name>", ProfileDataGet.as_view()),
+    path("file-upload", FileUploadView.as_view()),
 ]
