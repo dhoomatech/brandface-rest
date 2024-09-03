@@ -45,7 +45,10 @@ SECRET_KEY = 'django-insecure-=57vf463783^b_4h274&8mm(vq#4nu6p^u=jm3uh^tp%le2=j9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["13.112.86.78","127.0.0.1","api-uat.brandface.me"]
+
+ALLOWED_HOSTS = ["*"]
+
+CORS_ALLOWED_ORIGINS = ["https://api-uat.brandface.me"]
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
