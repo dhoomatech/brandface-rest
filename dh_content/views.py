@@ -84,35 +84,26 @@ class ProfileLinkViewSet2(viewsets.ViewSet):
     A simple ViewSet for listing or retrieving users.
     """
     queryset = ProfileLinks.objects.all()
-    serializer_class = ProfileLinksSerializer
+    serializer_class = ProfileLinksCreateSerializer
     permission_classes = [IsUserProfileOwner,]
 
     def create(self, request):
         try:
             user = request.user
-            request_post = request.data
-            request_post['user'] = user.id
-            serializer = ProfileLinksCreateSerializer(data=request_post)
+            request_post = request.POST
+            # print(request_post)
+            serializer = ProfileLinkSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 save_data = serializer.data
-                if "gallery_id" in request_post and request_post["gallery_id"]:
-                    UserGallery.objects.filter(id__in=request_post["gallery_id"]).update(profile=save_data['id'])
-                
-                if "social_media" in request_post and request_post["social_media"]:
-                    social_media_list = []
-                    for socialobj in request_post["social_media"]:
-                        social_media_list.append(UserConnections(profile_id=save_data['id'],social_id=socialobj['id'],value=socialobj['value']))
-
-                    if social_media_list:
-                        UserConnections.objects.bulk_create(social_media_list) 
-
                 return Response({'msg':'Data  created','data':save_data}, status=status.HTTP_201_CREATED)
             
             return Response(serializer.errors , status=status.HTTP_400_BAD_REQUEST)
         
         except Exception as e:
-            return Response({'msg':str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            import traceback
+            traceback.print_exc()
+            return Response({'msg':str(e), 'status':"error"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class UserNameCheck(APIView):
     def get(self, request,user_name):
@@ -195,7 +186,6 @@ class FileUploadView(APIView):
     permission_classes = (IsUserProfileOwner,)
     # parser_classes = (FileUploadParser,)
     def post(self, request):
-        print(request.data)
         serializer = UserGallerySerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()

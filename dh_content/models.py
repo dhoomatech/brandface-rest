@@ -8,10 +8,10 @@ from dh_user.models import User
 
 
 def upload_profile_avatar(instance, filename):
-    return "profile/avatar/".format(user=instance.ProfileLinks, filename=filename)
+    return "profile/avatar/".format(filename=filename)
 
 def upload_profile_background(instance, filename):
-    return "profile/background/".format(user=instance.ProfileLinks, filename=filename)
+    return "profile/background/".format(filename=filename)
 
 class ProfileLinks(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -22,8 +22,8 @@ class ProfileLinks(models.Model):
     email = models.CharField(max_length=255, default='', null=False,blank=True)
     phone_number = models.CharField(max_length=255)
     description = models.CharField(max_length=255, null=False,default='')
-    avatar = models.ImageField(upload_to=upload_profile_avatar, blank=True, null=False)
-    background = models.ImageField(upload_to=upload_profile_background, blank=True, null=False)
+    avatar = models.ImageField(upload_to="profile/avatar/", blank=True, null=False)
+    background = models.ImageField(upload_to="profile/background/", blank=True, null=False)
     background_color = models.CharField(max_length=50, default='', null=False,blank=True)
     qr_file = models.FileField(upload_to="qr-code", blank=True, null=False)
     status = models.BooleanField(default=1)
