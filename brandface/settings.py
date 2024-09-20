@@ -207,9 +207,9 @@ SESSION_CACHE_ALIAS = 'default'
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static',]
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = BASE_DIR / 'static'
 STORAGES = {
-    "staticfiles": {
+    "static": {
         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }
