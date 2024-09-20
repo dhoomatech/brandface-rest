@@ -91,7 +91,6 @@ class ProfileLinkViewSet2(viewsets.ViewSet):
         try:
             user = request.user
             request_post = request.POST
-            # print(request_post)
             serializer = ProfileLinkSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
