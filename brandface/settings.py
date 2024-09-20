@@ -21,20 +21,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 PROJECT_DIR = Path(__file__).resolve().parent
 
 SITE_HOST = env.str('SITE_HOST')
-SITE_URL_HTTP = 'http://{}'.format(SITE_HOST)
-SITE_URL_HTTPS = 'https://{}'.format(SITE_HOST)
+# SITE_URL_HTTP = 'http://{}'.format(SITE_HOST)
+# SITE_URL_HTTPS = 'https://{}'.format(SITE_HOST)
 
-USE_SSL = env.bool('USE_SSL', default=False)
-if USE_SSL:
-    DEFAULT_SITE_URL = SITE_URL_HTTPS
-    SECURE_SSL_REDIRECT = False
-    SESSION_COOKIE_SECURE=True
-    SECURE_HSTS_SECONDS = 31536000 #1 year, is common
-    SECURE_REDIRECT_EXEMPT = [r'^no-ssl/$']
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_SCHEME', 'https')
-else:
-   DEFAULT_SITE_URL = SITE_URL_HTTP
+# USE_SSL = env.bool('USE_SSL', default=False)
+# if USE_SSL:
+#     DEFAULT_SITE_URL = SITE_URL_HTTPS
+#     SECURE_SSL_REDIRECT = False
+#     SESSION_COOKIE_SECURE=True
+#     SECURE_HSTS_SECONDS = 31536000 #1 year, is common
+#     SECURE_REDIRECT_EXEMPT = [r'^no-ssl/$']
+#     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+#     SECURE_PROXY_SSL_HEADER = ('HTTP_X_SCHEME', 'https')
+# else:
+#    DEFAULT_SITE_URL = SITE_URL_HTTP
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
