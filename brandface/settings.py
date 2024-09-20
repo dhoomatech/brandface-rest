@@ -40,18 +40,18 @@ else:
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=57vf463783^b_4h274&8mm(vq#4nu6p^u=jm3uh^tp%le2=j9'
+SECRET_KEY = "django-insecure-=57vf463783^b_4h274&8mm(vq#4nu6p^u=jm3uh^tp%le2=j9"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 
 ALLOWED_HOSTS = ["*"]
+CSRF_TRUSTED_ORIGINS = ["https://*.brandface.me"]
+# CORS_ALLOWED_ORIGINS = []
 
-CORS_ALLOWED_ORIGINS = ["*"]
-
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_CREDENTIALS = True
+# CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOW_CREDENTIALS = True
 
 
 # Application definition
@@ -77,16 +77,28 @@ INSTALLED_APPS = [
     'dh_content',
 ]
 
+# MIDDLEWARE = [
+#     # "debug_toolbar.middleware.DebugToolbarMiddleware",
+#     "corsheaders.middleware.CorsMiddleware",
+#     'django.middleware.security.SecurityMiddleware',
+#     'django.contrib.sessions.middleware.SessionMiddleware',
+#     'django.middleware.common.CommonMiddleware',
+#     'django.middleware.csrf.CsrfViewMiddleware',
+#     'django.contrib.auth.middleware.AuthenticationMiddleware',
+#     'django.contrib.messages.middleware.MessageMiddleware',
+#     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+# ]
+
 MIDDLEWARE = [
-    # "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "corsheaders.middleware.CorsMiddleware",
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'brandface.urls'
@@ -224,7 +236,7 @@ MEDIA_ROOT = os.path.join(os.path.dirname(PROJECT_DIR), 'media')
 MEDIAFILES_DIRS = (
     os.path.join(BASE_DIR, 'media'),
 )
-# COMPRESS_ENABLED = True
+COMPRESS_ENABLED = True
 
 
 # Default primary key field type
