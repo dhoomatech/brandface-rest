@@ -47,8 +47,11 @@ DEBUG = True
 
 
 ALLOWED_HOSTS = ["*"]
-CSRF_TRUSTED_ORIGINS = ["https://api-uat.brandface.me"]
-CORS_ALLOWED_ORIGINS = ["*"]
+CSRF_TRUSTED_ORIGINS = ["https://*.brandface.me"]
+CORS_ALLOWED_ORIGINS = [
+    "https://api-uat.brandface.me",
+    "http://localhost:8005",
+]
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
