@@ -24,6 +24,8 @@ PROJECT_DIR = Path(__file__).resolve().parent
 # SITE_URL_HTTP = 'http://{}'.format(SITE_HOST)
 # SITE_URL_HTTPS = 'https://{}'.format(SITE_HOST)
 
+SITE_URL = os.getenv("SITE_URL", "http://127.0.0.1")
+
 # USE_SSL = env.bool('USE_SSL', default=False)
 # if USE_SSL:
 #     DEFAULT_SITE_URL = SITE_URL_HTTPS
@@ -48,19 +50,20 @@ DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 CSRF_TRUSTED_ORIGINS = [
+    SITE_URL,
     "https://api-uat.brandface.me",
     "http://localhost:8005",
     "https://*.brandface.me",
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "https://api-uat.brandface.me",
-    "http://localhost:8005",
-    "https://*.brandface.me",
-]
+# CORS_ALLOWED_ORIGINS = [
+#     "https://api-uat.brandface.me",
+#     "http://localhost:8005",
+#     "https://*.brandface.me",
+# ]
 
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_CREDENTIALS = True
+# CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOW_CREDENTIALS = True
 
 
 # Application definition
