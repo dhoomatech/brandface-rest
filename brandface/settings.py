@@ -79,7 +79,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     # 'debug_toolbar',
-    'sslserver',
+    # 'sslserver',
     
     'core',
     'dh_user',
