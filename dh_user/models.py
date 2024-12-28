@@ -6,7 +6,7 @@ from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.base_user import BaseUserManager
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
-from django_countries.fields import CountryField
+# from django_countries.fields import CountryField
 import logging
 
 from core.models import Location
@@ -153,7 +153,7 @@ class Address(models.Model):
     user = models.ForeignKey(User, related_name="addresses", on_delete=models.CASCADE)
     address_type = models.CharField(max_length=1, choices=ADDRESS_CHOICES)
     default = models.BooleanField(default=False)
-    country = CountryField()
+    # country = CountryField()
     city = models.CharField(max_length=100)
     street_address = models.CharField(max_length=100)
     apartment_address = models.CharField(max_length=100)

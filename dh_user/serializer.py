@@ -5,7 +5,7 @@ from email.policy import default
 from rest_framework import serializers
 from rest_framework import viewsets, status
 from .models import *
-from django_countries.serializers import CountryFieldMixin
+# from django_countries.serializers import CountryFieldMixin
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -48,7 +48,7 @@ class ResetPasswordSerializer(serializers.ModelSerializer):
         fields = ['password']
 
 
-class AddressReadOnlySerializer(CountryFieldMixin, serializers.ModelSerializer):
+class AddressReadOnlySerializer(serializers.ModelSerializer):
     """
     Serializer class to seralize Address model
     """
@@ -60,7 +60,7 @@ class AddressReadOnlySerializer(CountryFieldMixin, serializers.ModelSerializer):
         fields = "__all__"
 
 
-class ShippingAddressSerializer(CountryFieldMixin, serializers.ModelSerializer):
+class ShippingAddressSerializer(serializers.ModelSerializer):
     """
     Serializer class to seralize address of type shipping
 
@@ -81,7 +81,7 @@ class ShippingAddressSerializer(CountryFieldMixin, serializers.ModelSerializer):
         return representation
 
 
-class BillingAddressSerializer(CountryFieldMixin, serializers.ModelSerializer):
+class BillingAddressSerializer(serializers.ModelSerializer):
     """
     Serializer class to seralize address of type billing
 

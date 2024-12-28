@@ -13,7 +13,7 @@ from dh_user.mail import send_verify_email
 from django.http import HttpResponseRedirect
 from django.conf import settings
 from django.contrib.auth.base_user import BaseUserManager
-from rest_framework_simplejwt.tokens import RefreshToken
+# from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth.hashers import check_password
 
 from dh_content.models import ProfileLinks
@@ -86,13 +86,16 @@ class UserViewSet(viewsets.ModelViewSet):
         username = request.data.get("email")
         password = request.data.get("password")
         try:
+            from rest_framework.authtoken.models import Token
             user_obj = User.objects.get(email=username)
             if user_obj and check_password(password,user_obj.password):
-                refresh = RefreshToken.for_user(user_obj)
+                # refresh = RefreshToken.for_user(user_obj)
+                token, _ = Token.objects.get_or_create(user=user_obj)
                 card_count = ProfileLinks.objects.filter(user=user_obj).count()
                 return Response({
-                    'refresh': str(refresh),
-                    'access': str(refresh.access_token),
+                    'token':token.key,
+                    # 'refresh': str(refresh),
+                    # 'access': str(refresh.access_token),
                     "first_name":user_obj.first_name,
                     "last_name":user_obj.last_name,
                     "contact_number":str(user_obj.contact_number),

@@ -21,15 +21,15 @@ from django.conf.urls.static import static
 from dh_user.urls import router as UserRouter
 from dh_content.urls import router as ContentRouter
 
-from drf_spectacular.views import (
-    SpectacularSwaggerView,
-    SpectacularAPIView,
-)
+# from drf_spectacular.views import (
+#     SpectacularSwaggerView,
+#     SpectacularAPIView,
+# )
 
 urlpatterns = [
 
-    path('api/schema/', SpectacularAPIView.as_view(), name='api-schema'),
-    path('', SpectacularSwaggerView.as_view(url_name='api-schema'),name='api-docs'),
+    # path('api/schema/', SpectacularAPIView.as_view(), name='api-schema'),
+    # path('', SpectacularSwaggerView.as_view(url_name='api-schema'),name='api-docs'),
 
     path('admin/', admin.site.urls),
     path('', include("dh_content.urls")),

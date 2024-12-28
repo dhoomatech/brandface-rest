@@ -5,7 +5,7 @@ from email.policy import default
 from rest_framework import serializers
 from rest_framework import viewsets, status
 from .models import *
-from django_countries.serializers import CountryFieldMixin
+# from django_countries.serializers import CountryFieldMixin
 from rest_framework.validators import UniqueTogetherValidator
 from django.db import transaction
 
