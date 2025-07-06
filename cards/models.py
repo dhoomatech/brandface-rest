@@ -17,6 +17,7 @@ class BusinessProfile(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     google_review_link = models.URLField(blank=True, null=True)
     google_place_id = models.CharField(max_length=250, blank=True, null=True)
+    google_map = models.URLField(blank=True, null=True)
 
     
     def __str__(self):
