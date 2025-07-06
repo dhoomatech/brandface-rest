@@ -25,11 +25,11 @@ schema_view = get_schema_view(
 
 urlpatterns = [
    path('admin/', admin.site.urls),
-   path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-   path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-   path('api/users/', include('users_app.urls')),
-   path('api/cards/', include('cards.urls')),
-   path('api/social_media/', include('social_media.urls')),
+   path('api/<str:version>/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+   path('api/<str:version>/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+   path('api/<str:version>/users/', include('users_app.urls')),
+   path('api/<str:version>/cards/', include('cards.urls')),
+   path('api/<str:version>/social_media/', include('social_media.urls')),
 
 
    # Swagger
