@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import BusinessProfile, SocialMedia, Service, GalleryImage
+from .models import BusinessProfile, SocialMedia, Service, GalleryImage, SocialMediaPlatform
 
 class SocialMediaSerializer(serializers.ModelSerializer):
     class Meta:
@@ -28,3 +28,8 @@ class BusinessProfileSerializer(serializers.ModelSerializer):
         model = BusinessProfile
         fields = '__all__'
         read_only_fields = ['owner']
+
+class SocialMediaPlatformSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SocialMediaPlatform
+        fields = ['id', 'name', 'icon']

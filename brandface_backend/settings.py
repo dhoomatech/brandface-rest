@@ -38,6 +38,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     # Django apps
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -178,6 +179,9 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.MultiPartParser',   # For file uploads
         'rest_framework.parsers.FormParser',
     ),
+    'DEFAULT_RENDERER_CLASSES': [
+        'utils.renderers.ConditionalEncryptedJSONRenderer',
+    ],
 }
 
 
@@ -191,3 +195,9 @@ SIMPLE_JWT = {
 }
 
 CORS_ALLOW_ALL_ORIGINS = True  # Or set specific origins
+
+ENCRYPTION_KEY = os.getenv('ENCYPT_KEY')
+
+PUBLIC_PATHS = [
+    '/api/cards/profiles-data/public/',
+]

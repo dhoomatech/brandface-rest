@@ -21,7 +21,7 @@ db.sqlite3
 .env.*
 
 # Django media/static
-/media/
+# /media/
 /staticfiles/
 /static_root/
 /media_root/
