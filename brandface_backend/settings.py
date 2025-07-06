@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     # Custom apps
     'users_app',
     'cards',
+    'social_media',
 ]
 
 MIDDLEWARE = [
@@ -69,6 +70,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'middleware.plan_limits.PlanLimitMiddleware',
 ]
 
 ROOT_URLCONF = 'brandface_backend.urls'

@@ -29,6 +29,7 @@ urlpatterns = [
    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
    path('api/users/', include('users_app.urls')),
    path('api/cards/', include('cards.urls')),
+   path('api/social_media/', include('social_media.urls')),
 
 
    # Swagger

@@ -9,6 +9,10 @@ class SocialMediaInline(admin.TabularInline):
     show_change_link = True
 
 
+class PhoneNumberInline(admin.TabularInline):
+    model = PhoneNumber
+    extra = 1
+
 class ServiceInline(admin.TabularInline):
     model = Service
     extra = 1
@@ -29,7 +33,7 @@ class BusinessProfileAdmin(admin.ModelAdmin):
     search_fields = ('business_name', 'unique_name', 'owner__username', 'email')
     list_filter = ('created_at',)
     prepopulated_fields = {'unique_name': ('business_name',)}
-    inlines = [SocialMediaInline, ServiceInline, GalleryImageInline]
+    inlines = [SocialMediaInline, ServiceInline, GalleryImageInline, PhoneNumberInline]
 
 
 @admin.register(SocialMedia)

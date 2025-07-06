@@ -14,9 +14,17 @@ class BusinessProfile(models.Model):
     website = models.URLField(blank=True)
     logo = models.ImageField(upload_to='logos/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    google_review_link = models.URLField(blank=True, null=True)
+    google_place_id = models.CharField(max_length=250, blank=True, null=True)
 
     def __str__(self):
         return self.business_name
+    
+    # @property
+    # def google_review_link(self):
+    #     if self.google_place_id:
+    #         return f"https://search.google.com/local/writereview?placeid={self.google_place_id}"
+    #     return None
 
 class SocialMediaPlatform(models.Model):
     name = models.CharField(max_length=50, unique=True)
@@ -56,3 +64,11 @@ class GalleryImage(models.Model):
 
     def __str__(self):
         return f"Image for {self.profile.business_name}"
+
+
+class PhoneNumber(models.Model):
+    profile = models.ForeignKey(BusinessProfile, on_delete=models.CASCADE, related_name='phone_numbers')
+    number = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.number
