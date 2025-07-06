@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'users_app',
     'cards',
     'social_media',
+    'thirdparty_api',
 ]
 
 MIDDLEWARE = [
@@ -173,7 +174,7 @@ REST_FRAMEWORK = {
 
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',
     'DEFAULT_VERSION': 'v1',
-    'ALLOWED_VERSIONS': ('v1', 'v2'),
+    'ALLOWED_VERSIONS': ('v1'),
 
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'users_app.backends.CustomJWTAuthentication',
@@ -206,5 +207,6 @@ CORS_ALLOW_ALL_ORIGINS = True  # Or set specific origins
 ENCRYPTION_KEY = os.getenv('ENCYPT_KEY')
 
 PUBLIC_PATHS = [
-    'api/v1/cards/profiles-data/public',
+    'cards/api/v1/profiles-data/public/',
+    'cards/api/v2/profiles-data/public/',
 ]

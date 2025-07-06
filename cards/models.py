@@ -72,3 +72,13 @@ class PhoneNumber(models.Model):
 
     def __str__(self):
         return self.number
+
+
+class BusinessProfileSEO(models.Model):
+    profile = models.OneToOneField('BusinessProfile', on_delete=models.CASCADE, related_name='seo')
+    meta_title = models.CharField(max_length=255)
+    meta_description = models.TextField()
+    keywords = models.TextField()
+
+    def __str__(self):
+        return f"SEO for {self.profile.business_name}"

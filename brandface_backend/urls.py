@@ -27,14 +27,16 @@ urlpatterns = [
    path('admin/', admin.site.urls),
    path('api/<str:version>/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
    path('api/<str:version>/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-   path('api/<str:version>/users/', include('users_app.urls')),
-   path('api/<str:version>/cards/', include('cards.urls')),
-   path('api/<str:version>/social_media/', include('social_media.urls')),
+   path('users/api/<str:version>/', include('users_app.urls')),
+   path('cards/api/<str:version>/', include('cards.urls')),
+   path('social-media/api/<str:version>/', include('social_media.urls')),
 
 
    # Swagger
    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
    path('', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+
+   path('integrations/', include('thirdparty_api.urls')),
 
 ]
 

@@ -53,7 +53,7 @@ class BusinessProfileViewPublic(viewsets.ModelViewSet):
     permission_classes = [AllowAny]
 
     @action(detail=False, methods=['get'], url_path='public/(?P<unique_name>[^/.]+)', permission_classes=[AllowAny])
-    def public(self, request, unique_name=None):
+    def public(self, request,version=None, unique_name=None):
         """
         Public endpoint to fetch a business profile by its unique_name.
         """

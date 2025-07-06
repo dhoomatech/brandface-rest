@@ -8,6 +8,7 @@ from rest_framework import status
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework_simplejwt.exceptions import InvalidToken, TokenError
 from django.conf import settings
+import re
 
 User = get_user_model()
 
@@ -26,6 +27,9 @@ class EmailBackend(ModelBackend):
 class CustomJWTAuthentication(JWTAuthentication):
     def authenticate(self, request):
 
+        if re.match(r'^/cards/api/v1/profiles-data/public/.+', request.path):
+            return None  # Skip JWT check
+        
         for path in settings.PUBLIC_PATHS:
             if request.path.startswith(path):
                 return None  # Skip JWT check

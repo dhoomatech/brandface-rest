@@ -75,3 +75,9 @@ class SocialMediaPlatformAdmin(admin.ModelAdmin):
             return format_html('<img src="{}" style="height:25px;" />', obj.icon.url)
         return "-"
     icon_preview.short_description = "Icon"
+
+
+@admin.register(BusinessProfileSEO)
+class BusinessProfileSEOAdmin(admin.ModelAdmin):
+    list_display = ('profile', 'meta_title', 'meta_description')
+    search_fields = ('profile__business_name', 'meta_title')
