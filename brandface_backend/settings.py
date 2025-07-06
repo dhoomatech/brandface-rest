@@ -170,7 +170,7 @@ AUTHENTICATION_BACKENDS = [
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10, 
-    
+
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',
     'DEFAULT_VERSION': 'v1',
     'ALLOWED_VERSIONS': ('v1', 'v2'),
@@ -206,5 +206,5 @@ CORS_ALLOW_ALL_ORIGINS = True  # Or set specific origins
 ENCRYPTION_KEY = os.getenv('ENCYPT_KEY')
 
 PUBLIC_PATHS = [
-    '/api/cards/profiles-data/public/',
+    'api/v1/cards/profiles-data/public',
 ]
