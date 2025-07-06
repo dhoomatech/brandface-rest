@@ -81,3 +81,19 @@ class SocialMediaPlatformAdmin(admin.ModelAdmin):
 class BusinessProfileSEOAdmin(admin.ModelAdmin):
     list_display = ('profile', 'meta_title', 'meta_description')
     search_fields = ('profile__business_name', 'meta_title')
+
+@admin.register(ThemeTemplate)
+class ThemeTemplateAdmin(admin.ModelAdmin):
+    list_display = ['name']
+
+@admin.register(ThemeSetting)
+class ThemeSettingAdmin(admin.ModelAdmin):
+    list_display = ['profile', 'primary_color', 'font_family']
+
+
+@admin.register(TrackingConfig)
+class TrackingConfigAdmin(admin.ModelAdmin):
+    list_display = ['profile', 'google_analytics_id', 'facebook_pixel_id', 'google_tag_manager_id']
+
+
+admin.site.register(ProfileSettings)
