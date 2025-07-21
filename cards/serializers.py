@@ -21,11 +21,17 @@ class TrackingConfigSerializer(serializers.ModelSerializer):
         model = TrackingConfig
         fields = '__all__'
 
+class SocialMediaPlatformSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SocialMediaPlatform
+        fields = ['name', 'icon']
+        read_only_fields = fields  # make all fields read-only
+
 class SocialMediaSerializer(serializers.ModelSerializer):
+    platform = SocialMediaPlatformSerializer(read_only=True)
     class Meta:
         model = SocialMedia
-        fields = '__all__'
-        read_only_fields = ['profile']
+        exclude = ['id','profile']
 
 class ServiceSerializer(serializers.ModelSerializer):
     class Meta:
@@ -55,6 +61,30 @@ class ProfileSettingsSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class BusinessProfileSerializer(serializers.ModelSerializer):
+    social_links = SocialMediaSerializer(many=True, read_only=True)
+    services = ServiceSerializer(many=True, read_only=True)
+    gallery = GalleryImageSerializer(many=True, read_only=True)
+    phone_numbers = PhoneNumberSerializer(many=True, read_only=True)
+    seo = BusinessProfileSEOSerializer(read_only=True)
+    tracking = TrackingConfigSerializer(read_only=True)
+    profile_setting = serializers.SerializerMethodField()
+    theme_setting = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = BusinessProfile
+        fields = '__all__'
+        read_only_fields = ['owner']
+    
+    def get_theme_setting(self, obj):
+        setting = ThemeSetting.objects.filter(profile=obj).first()
+        return ThemeSettingSerializer(setting).data if setting else {}
+
+    def get_profile_setting(self, obj):
+        setting = ProfileSettings.objects.filter(profile=obj).first()
+        return ProfileSettingsSerializer(setting).data if setting else {}
+
+
+class BusinessProfileViewSerializer(serializers.ModelSerializer):
     social_links = SocialMediaSerializer(many=True, read_only=True)
     services = ServiceSerializer(many=True, read_only=True)
     gallery = GalleryImageSerializer(many=True, read_only=True)

@@ -9,7 +9,10 @@ from rest_framework.response import Response
 from drf_yasg.utils import swagger_auto_schema
 from users_app.utils import *
 
-
+# user_obj = User.objects.filter(id=2).first()
+# user_obj.set_password("aftab123")
+# user_obj.save()
+# print(user_obj.__dict__)
 
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -22,17 +25,29 @@ class RegisterView(generics.CreateAPIView):
 class CustomLoginView(APIView):
     permission_classes = [AllowAny]
     @swagger_auto_schema(request_body=OTPLoginSerializer)
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
         try:
+            version = kwargs.get('version', None)
             serializer = OTPLoginSerializer(data=request.data)
             serializer.is_valid(raise_exception=True)
             user = serializer.validated_data['user']
             refresh = RefreshToken.for_user(user)
+
+            if user.profile_image and hasattr(user.profile_image, 'url'):
+                image_url = user.profile_image.url
+            else:
+                image_url = None  # or set a default image path
             return Response(
                 {
                 "status":"success",
                 "response_code":200,"message":"User loggines successfully",
                 "user_role":user.role,
+                "username":user.username,
+                "first_name":user.first_name,
+                "last_name":user.last_name,
+                "email":user.email,
+                "date_joined":user.date_joined.strftime('%Y-%m-%d'),
+                "profile_image":image_url,
                 "data":{
                     'refresh': str(refresh),
                     'access': str(refresh.access_token),

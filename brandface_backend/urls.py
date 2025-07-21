@@ -30,6 +30,7 @@ urlpatterns = [
    path('users/api/<str:version>/', include('users_app.urls')),
    path('cards/api/<str:version>/', include('cards.urls')),
    path('social-media/api/<str:version>/', include('social_media.urls')),
+   path('enquiries/api/<str:version>/', include('enquiries.urls')),
 
 
    # Swagger

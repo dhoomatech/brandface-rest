@@ -104,10 +104,10 @@ class BusinessProfileSEO(models.Model):
 
 class TrackingConfig(models.Model):
     profile = models.OneToOneField('BusinessProfile', on_delete=models.CASCADE, related_name='tracking')
-
-    google_analytics_id = models.CharField(max_length=50, blank=True, help_text="e.g. UA-XXXXX-Y or G-XXXXXXX")
-    facebook_pixel_id = models.CharField(max_length=50, blank=True, help_text="e.g. 123456789012345")
-    google_tag_manager_id = models.CharField(max_length=50, blank=True, help_text="e.g. GTM-XXXXXX")
+    google_analytics_id = models.CharField(max_length=150, blank=True, help_text="e.g. UA-XXXXX-Y or G-XXXXXXX")
+    facebook_pixel_id = models.CharField(max_length=150, blank=True, help_text="e.g. 123456789012345")
+    google_tag_manager_id = models.CharField(max_length=150, blank=True, help_text="e.g. GTM-XXXXXX")
+    google_property_id = models.CharField(max_length=150, blank=True, help_text="e.g. YOUR-GA4-PROPERTY-ID")
 
     def __str__(self):
         return f"Tracking for {self.profile.business_name}"

@@ -22,3 +22,8 @@ dj-database-url==3.0.0
 django-jazzmin==3.0.1
 cryptography==45.0.5
 requests==2.32.4
+firebase-admin==6.9.0
+couchbase==4.4.0
+django-redis==6.0.0
+google-analytics-data==0.18.19
+libcouchbase-dev

@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'cards',
     'social_media',
     'thirdparty_api',
+    'enquiries',
 ]
 
 MIDDLEWARE = [
@@ -102,6 +103,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+    },
+    'analytics': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'analytics.sqlite3',
     }
 }
 
@@ -210,3 +215,15 @@ PUBLIC_PATHS = [
     'cards/api/v1/profiles-data/public/',
     'cards/api/v2/profiles-data/public/',
 ]
+
+DATABASE_ROUTERS = ['utils.routers.AnalyticsRouter']
+
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django_redis.cache.RedisCache',
+#         'LOCATION': 'redis://default:AUYwAAIjcDFlYmMxNTIwN2Q1Yjk0NzQxOTUxYmNlZDlkZjMyM2Q2NXAxMA@beloved-flea-17968.upstash.io:6379/1',  # use DB 1 for specific URLs
+#         'OPTIONS': {
+#             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+#         }
+#     }
+# }

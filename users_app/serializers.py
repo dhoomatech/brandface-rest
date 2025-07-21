@@ -27,7 +27,27 @@ class OTPLoginSerializer(serializers.Serializer):
     def validate(self, attrs):
         email = attrs.get('email')
         password = attrs.get('password')
-        user = authenticate(request=self.context.get('request'),email=email, password=password)
+
+        # Try email lookup
+        user = User.objects.filter(email__iexact=email).first()
+
+        if not user:
+            # If not email, try username
+            user = User.objects.filter(username__iexact=email).first()
+
+        if not user:
+            raise serializers.ValidationError("Invalid username or email.")
+        
+        # Authenticate the user
+        authenticated_user = authenticate(
+            request=self.context.get('request'),
+            username=user.username,  # use username always for authenticate()
+            password=password
+        )
+
+        if not authenticated_user:
+            raise serializers.ValidationError("Incorrect password.")
+        
         if not user:
             raise Exception("The credentials you enetered is incorrect")
         attrs['user'] = user
