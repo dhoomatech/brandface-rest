@@ -26,4 +26,4 @@ firebase-admin==6.9.0
 couchbase==4.4.0
 django-redis==6.0.0
 google-analytics-data==0.18.19
-libcouchbase-dev
+# libcouchbase-dev
