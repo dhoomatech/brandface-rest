@@ -71,6 +71,7 @@ class GalleryImage(models.Model):
 
 class PhoneNumber(models.Model):
     profile = models.ForeignKey(BusinessProfile, on_delete=models.CASCADE, related_name='phone_numbers')
+    tittle = models.CharField(max_length=20, default="Office")
     number = models.CharField(max_length=20)
 
     def __str__(self):
@@ -123,6 +124,7 @@ class ThemeTemplate(models.Model):
 
 class ThemeSetting(models.Model):
     profile = models.ForeignKey(BusinessProfile, on_delete=models.CASCADE, related_name='theme_setting')
+    profile_banner = models.ImageField(upload_to='banner/', blank=True, null=True)
     theme_template = models.OneToOneField(ThemeTemplate, on_delete=models.CASCADE, related_name='template', blank=True, null=True)
     primary_color = models.CharField(max_length=7, default='#000000')  # hex color
     secondary_color = models.CharField(max_length=7, default='#ffffff')

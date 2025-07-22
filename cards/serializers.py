@@ -48,7 +48,7 @@ class GalleryImageSerializer(serializers.ModelSerializer):
 class PhoneNumberSerializer(serializers.ModelSerializer):
     class Meta:
         model = PhoneNumber
-        fields = ['id', 'number']
+        fields = ['tittle','number']
 
 class BusinessProfileSEOSerializer(serializers.ModelSerializer):
     class Meta:
