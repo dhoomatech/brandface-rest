@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import *
-
+from django.conf import settings
 
 
 class ThemeTemplateSerializer(serializers.ModelSerializer):
@@ -67,8 +67,8 @@ class BusinessProfileSerializer(serializers.ModelSerializer):
     phone_numbers = PhoneNumberSerializer(many=True, read_only=True)
     seo = BusinessProfileSEOSerializer(read_only=True)
     tracking = TrackingConfigSerializer(read_only=True)
-    profile_setting = serializers.SerializerMethodField()
-    theme_setting = serializers.SerializerMethodField()
+    profile_setting = serializers.SerializerMethodField(read_only=True)
+    theme_setting = serializers.SerializerMethodField(read_only=True)
     
     class Meta:
         model = BusinessProfile
@@ -77,7 +77,12 @@ class BusinessProfileSerializer(serializers.ModelSerializer):
     
     def get_theme_setting(self, obj):
         setting = ThemeSetting.objects.filter(profile=obj).first()
-        return ThemeSettingSerializer(setting).data if setting else {}
+        response = ThemeSettingSerializer(setting).data if setting else {}
+        if "profile_banner" in response and response['profile_banner']:
+            profile_banner = response['profile_banner']
+            response['profile_banner'] = f'{settings.BASE_URL}{profile_banner}'
+
+        return response
 
     def get_profile_setting(self, obj):
         setting = ProfileSettings.objects.filter(profile=obj).first()
