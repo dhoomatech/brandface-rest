@@ -112,7 +112,7 @@ class BusinessProfileViewSerializer(serializers.ModelSerializer):
         setting = ProfileSettings.objects.filter(profile=obj).first()
         return ProfileSettingsSerializer(setting).data if setting else {}
     
-class SocialMediaPlatformSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SocialMediaPlatform
-        fields = ['id', 'name', 'icon']
+# class SocialMediaPlatformSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = SocialMediaPlatform
+#         fields = ['id', 'name', 'icon']
