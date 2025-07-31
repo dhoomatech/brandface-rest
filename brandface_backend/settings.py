@@ -15,6 +15,10 @@ from datetime import timedelta
 import os
 from dotenv import load_dotenv
 import dj_database_url
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
 
 load_dotenv()
 
@@ -61,6 +65,7 @@ INSTALLED_APPS = [
     'social_media',
     'thirdparty_api',
     'enquiries',
+    'projectag',
 ]
 
 MIDDLEWARE = [
@@ -100,7 +105,9 @@ WSGI_APPLICATION = 'brandface_backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-if os.getenv('LIVE_MODE'):
+LIVE_MODE = os.getenv('LIVE_MODE', 'False').lower() in ('true', '1', 'yes')
+
+if LIVE_MODE:
     DATABASES = {
         'default': dj_database_url.config(
             default=os.getenv('DATABASE_URL')
@@ -121,7 +128,6 @@ else:
             'NAME': BASE_DIR / 'analytics.sqlite3',
         }
     }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -226,6 +232,16 @@ PUBLIC_PATHS = [
 DATABASE_ROUTERS = ['utils.routers.AnalyticsRouter']
 
 BASE_URL = os.getenv('BASE_URL',"http://127.0.0.1:8000")
+
+
+# CLOUDINARY_STORAGE = {
+#     'CLOUD_NAME': 'dwpimhl4j',
+#     'API_KEY': '878292816479344',
+#     'API_SECRET': 'HL9GgIU9jk921ethNurZsla5Fvg',
+# }
+
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 
 # CACHES = {
 #     'default': {
