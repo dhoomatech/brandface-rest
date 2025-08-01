@@ -28,4 +28,5 @@ django-redis==6.0.0
 google-analytics-data==0.18.19
 django-import-export==4.3.9
 cloudinary==1.44.1
+django-storages==1.14.6
 # libcouchbase-dev
