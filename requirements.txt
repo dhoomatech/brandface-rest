@@ -27,5 +27,5 @@ couchbase==4.4.0
 django-redis==6.0.0
 google-analytics-data==0.18.19
 django-import-export==4.3.9
-# cloudinary==1.44.1
+cloudinary==1.44.1
 # libcouchbase-dev
